@@ -1,19 +1,22 @@
 class Note {
   final int id;
   final String content;
-  final DateTime timestamp;
+  final DateTime created_on;
+  final DateTime updated_on;
 
   Note({
     required this.id,
     required this.content,
-    required this.timestamp,
+    required this.created_on,
+    required this.updated_on,
   });
 
   Map<String, dynamic> toMap() {
     return {
       'id': id,
       'content': content,
-      'timestamp': timestamp.toIso8601String(),
+      'created_on': created_on,
+      'updated_on': updated_on,
     };
   }
 
@@ -21,7 +24,8 @@ class Note {
     return Note(
       id: map['id'],
       content: map['content'],
-      timestamp: DateTime.parse(map['timestamp']),
+      created_on: DateTime.parse(map['created_on']),
+      updated_on: DateTime.parse(map['updated_on']),
     );
   }
 }

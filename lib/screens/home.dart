@@ -26,9 +26,9 @@ class _HomeState extends State<Home> {
   _retrieveNotes() async {
     notes = [];
 
-    List response = json.decode((await client.get(retrieveUrl)).body);
-
-    response.forEach((element) {
+    var response = await client.get(Uri.parse("${url}/note/load/"));
+    List res = json.decode(response.body);
+    res.forEach((element) {
       notes.add(Note.fromMap(element));
     });
     setState(() {});
@@ -56,13 +56,14 @@ class _HomeState extends State<Home> {
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-        child: Column(
-          children: [
-            ListTile(
-              title: Text("The broken wings"),
+        child: ListView.builder(
+          itemCount: notes.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+              title: Text(notes[index].content),
               subtitle: Text("10/24 09:55"),
-            )
-          ],
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(
