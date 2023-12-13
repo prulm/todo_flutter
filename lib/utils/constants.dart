@@ -1,0 +1,1 @@
+var retrieveUrl = Uri.https('localhost', 'note/load/');
